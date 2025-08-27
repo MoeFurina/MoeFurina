@@ -1,3 +1,9 @@
+<div align="center">
+  <img alt="banner" height="100%" src="https://vimg.focalors.ltd/alpaper.png" />
+  <h1>Hello There 👋</h1>
+  <img alt="logo" height="80" src="https://count.getloli.com/@iamfurinagithub?name=iamfurinagithub&theme=original-new&padding=7&offset=0&align=center&scale=1&pixelated=1&darkmode=auto" />
+</div>
+
 ## Who am I
 
 我是一名热爱计算机与编程的高中生, 喜欢折腾东西
