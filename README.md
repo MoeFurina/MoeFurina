@@ -1,7 +1,6 @@
 <div align="center">
   <img alt="banner" height="100%" src="https://vimg.focalors.ltd/alpaper.png" />
-  <h1>Hello There 👋</h1>
-  <img alt="logo" height="80" src="https://count.getloli.com/@iamfurinagithub?name=iamfurinagithub&theme=original-new&padding=7&offset=0&align=center&scale=1&pixelated=1&darkmode=auto" />
+  <h1>Hello There 👋 <br>I'm a front-end develpoer </h1>
 </div>
 
 ## Who am I
@@ -43,3 +42,7 @@
 - [BiliBili](https://space.bilibili.com/512316998)
 - [Telegram](https://t.me/IamFurinaMoe)
 - QQ: 2560467728
+
+<div align="center">
+  <img alt="logo" height="80" src="https://count.getloli.com/@iamfurinagithub?name=iamfurinagithub&theme=original-new&padding=7&offset=0&align=center&scale=1&pixelated=1&darkmode=auto" />
+</div>
