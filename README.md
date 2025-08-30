@@ -36,7 +36,7 @@
 |   **PhiCommunity Revive**    |    **<https://phicm.focalors.ltd/>**    |
 |  **音&emsp;乐**   |    **<https://y.focalors.ltd/>**    |
 |  **PhiTogether**  |    **<https://phitogether.focalors.ltd/>**    |
-| **网易云音乐&emsp;API** |    **<https://music-api.focalors.ltd/>**    |
+| **网易云音乐&emsp;API** |    **<https://neteasecloudmusicapienhanced.js.org/>**    |
 
 ## 联系我
 - [BiliBili](https://space.bilibili.com/512316998)
