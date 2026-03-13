@@ -24,7 +24,7 @@
     "change": "git cliff --bump -o CHANGELOG.md",
     "prepare": "husky",
     "knip": "knip",
-    "koharu": "npx tsx scripts/koharu.tsx",
+    "menu": "npx tsx scripts/koharu.tsx",
     "cms": "cd cms && pnpm dev",
     "cms:install": "cd cms && pnpm install"
   },
