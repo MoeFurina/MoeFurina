@@ -10,6 +10,12 @@ categories:
 ---
 这篇文章将会详细描述了通过建议的抓包工具进行抓取网易云音乐接口的数据包, 并讲解了如何对网易云音乐 api 开源项目进行贡献.
 
+## 视频教程
+
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116228643363668&bvid=BV1xKw8zmEZy&cid=25980246711&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+
+[点击观看视频教程](https://www.bilibili.com/video/BV1xKw8zmEZy)
+
 ## 抓包工具
 
 针对网易云音乐接口的抓包, 组织[NeteaseCloudMusicApiEnhanced](https://github.com/neteasecloudmusicapienhanced)提供了一个专门的抓包工具[api-clawer](https://github.com/neteasecloudmusicapienhanced/api-clawer) , 这个工具可以帮助我们轻松地抓取网易云音乐接口的数据包, 并且提供了一个友好的界面来查看和分析这些数据包. 下文将会详细介绍如何使用这个工具来抓取网易云音乐接口的数据包.
