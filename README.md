@@ -1,7 +1,3 @@
-<div align="center">
-  <img alt="banner" height="100%" src="https://vimg.focalors.ltd/WallpaperEngineOverride.jpg" />
-  <h1>Hello There 👋 <br>I'm a front-end develpoer </h1>
-</div>
 
 ## Who am I
 
