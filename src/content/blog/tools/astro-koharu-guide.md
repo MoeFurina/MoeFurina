@@ -383,6 +383,7 @@ excludeFromSummary: false # 是否排除 AI 摘要和相似度计算（默认 fa
 math: false # 是否启用数学公式渲染（默认 false，启用后支持 KaTeX）
 quiz: false # 是否启用练习题交互（默认 false，启用后支持四种题型）
 password: mySecret # 整篇文章加密密码（可选，设置后整篇文章需输入密码才能阅读）
+keywords: # 文章关键词（可选）
 ---
 ```
 
@@ -1634,7 +1635,9 @@ fn main() {
 
 *音频播放器（`enableShokaHexoTags`）：*
 
-使用 `{% media audio %}` 标签嵌入音频播放器，支持网易云音乐等平台（通过 Meting API 解析）：
+使用 `{% media audio %}` 标签嵌入音频播放器，支持网易云音乐、QQ 音乐等平台（通过 [Meting](https://github.com/metowolf/meting) API 解析）。
+
+默认使用 `https://163.hyc.moe/` 作为 Meting API，可在 `config/site.yaml` 的 `bgm.metingApi` 中自定义，推荐自部署以获得更稳定的服务。
 
 ```markdown
 {% media audio %}
@@ -2119,7 +2122,24 @@ analytics:
     enabled: true
     id: your-umami-id
     endpoint: https://stats.example.com
+    # 页面访问量展示（可选）
+    statistics_display:
+      token: your-umami-share-token  # Umami 分享链接令牌（只读，可安全暴露到客户端）
+      article_page_views: true        # 在文章卡片和详情页显示访问量
+      footer_site_stats: true         # 在页脚显示全站访问量
 ```
+
+#### 获取 Umami Share Token
+
+`statistics_display.token` 是 Umami 的**分享链接令牌**，用于通过公开 API 读取统计数据（只读权限，可安全暴露到前端）。获取步骤：
+
+1. 登录你的 Umami 后台
+2. 进入 **Settings → Websites**，选择你的站点
+3. 点击右侧 **Share URL** 按钮（分享图标）
+4. 开启 **Enable share URL** 开关，此时会生成一个分享链接，形如：`https://stats.example.com/share/xxxxxxxx/site-name`
+5. 链接中 `/share/` 后面的那段字符串（如 `xxxxxxxx`）即为 share token，将其填入 `statistics_display.token` 即可
+
+> 注：Share token 仅提供只读权限，无法通过它修改任何数据或配置，因此可以安全地暴露到客户端代码中。
 
 ## 开发指南
 
@@ -2293,6 +2313,11 @@ analytics:
     enabled: true
     id: your-umami-id
     endpoint: https://your-umami-server.com
+    # 页面访问量展示（可选，需要 share token）
+    # statistics_display:
+    #   token: your-umami-share-token
+    #   article_page_views: true
+    #   footer_site_stats: true
 ```
 
 Docker 端口可在 `.env` 中配置 `BLOG_PORT=4321`。
@@ -2679,7 +2704,7 @@ cover: /img/cover/1.webp
 
 ### 如何添加评论功能？
 
-项目支持三种评论系统：**Waline**、**Giscus**、**Remark42**。在 `config/site.yaml` 的 `comment` 配置块中选择使用的提供商。
+项目支持四种评论系统：**Waline**、**Giscus**、**Remark42**、**Twikoo**。在 `config/site.yaml` 的 `comment` 配置块中选择使用的提供商。
 
 #### Waline（推荐）
 
@@ -2908,6 +2933,61 @@ comment:
 
 - [giscus 官网](https://giscus.app/zh-CN)
 - [giscus-component 文档](https://github.com/giscus/giscus-component)
+
+### Twikoo
+
+[Twikoo](https://twikoo.js.org/) 是一个搭建免费，部署简单，功能丰富的简洁、安全、易用的静态网站评论系统。
+
+**特点：**
+
+- ☁️ 云开发 / 自托管双部署模式
+- 🔒 隐私安全，无广告、无恶意追踪
+- 📧 支持邮件 / 微信公众号评论通知
+- ⚙️ 后台评论审核、敏感词过滤
+- 😊 内置表情包、支持图片上传
+- 🌙 原生支持深色 / 浅色主题切换
+- 👥 访客标记、评论点赞、楼中楼回复
+- 🛡️ 内置反垃圾评论防护
+
+**前置要求：**
+
+1. 部署 Twikoo 服务端（腾讯云开发 / 自托管，部署指南）
+2. 配置云开发环境 ID 或 自托管服务地址
+
+**配置示例：**
+
+```yaml
+comment:
+  provider: twikoo
+  twikoo:
+    envId: # Twikoo 环境 ID (腾讯云) 或 Vercel 环境地址 (必填)
+    region: # 环境地域，默认为 ap-shanghai
+    path: # 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+    lang: # 语言 (默认: 'zh-CN')
+```
+
+**参数说明：**
+
+| 参数     | 类型     | 说明                                                          |
+| -------- | -------- | ------------------------------------------------------------- |
+| `envId`  | `string` | Twikoo 环境 ID (**必填**，需带 `https://` 或 `https://`） |
+| `region` | `string` | 环境地域，默认为 `'ap-shanghai'`                           |
+| `path`   | `string` | 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数 |
+| `lang`   | `string` | 语言 (默认: `'zh-CN'`)                                    |
+
+**部署 Twikoo 服务端：**
+
+参考 [Twikoo 官网](https://twikoo.js.org/) 获取详细部署指南。
+
+**主题自动切换：**
+
+Twikoo 已实现主题自动切换
+
+**参考链接：**
+
+- [Twikoo 官网](https://twikoo.js.org/)
+
+
 
 ### 草稿文章如何预览？
 

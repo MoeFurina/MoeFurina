@@ -27,6 +27,8 @@ export interface SiteBasicConfig {
   timezone?: string;
   /** ICP filing number. Supports plain text or { text, link } format */
   icp?: string | { text: string; link?: string };
+  /** Enable slug transliteration (converts CJK characters to pinyin/romaji) @default false */
+  enableSlugTransliteration?: boolean;
 }
 
 // =============================================================================
@@ -153,6 +155,7 @@ export interface ContentConfig {
   enableLinkEmbed: boolean;
   enableTweetEmbed: boolean;
   enableOGPreview: boolean;
+  enableCodePenEmbed: boolean;
   previewCacheTime: number;
   lazyLoadEmbeds: boolean;
   // Shoka compatibility features
@@ -439,6 +442,12 @@ export interface UmamiConfig {
   enabled: boolean;
   id: string;
   endpoint: string;
+  statistics_display?: {
+    /** Umami share link token (read-only, safe to expose on client) */
+    token: string;
+    article_page_views: boolean;
+    footer_site_stats: boolean;
+  };
 }
 
 export interface AnalyticsConfig {
@@ -534,6 +543,8 @@ export interface BgmAudioGroup {
 
 export interface BgmConfig {
   enabled?: boolean;
+  /** Meting API endpoint URL. Defaults to 'https://163.hyc.moe/' */
+  metingApi?: string;
   audio?: BgmAudioGroup[];
 }
 
