@@ -1,4 +1,4 @@
-name: my-bot
+name: opencode
 
 on:
   issue_comment:
@@ -24,7 +24,6 @@ jobs:
     permissions:
       contents: read
     steps:
-      # 用你自己的 App 签发 token —— 评论就以你的 bot 身份发出
       - name: Generate bot token
         id: token
         uses: actions/create-github-app-token@v1
@@ -39,16 +38,17 @@ jobs:
           persist-credentials: false
           token: ${{ steps.token.outputs.token }}
 
-      # 内核：还是 opencode
+      - name: Configure git identity
+        run: |
+          git config --global user.name "takanashi-hoshino-agent[bot]"
+          git config --global user.email "takanashi-hoshino-agent[bot]@users.noreply.github.com"
+
       - name: Run opencode
         uses: anomalyco/opencode/github@latest
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           GITHUB_TOKEN: ${{ steps.token.outputs.token }}
         with:
-          model: opencode/deepseek-v4-flash-free         # 换成你爱用的
-          use_github_token: true              # 关键！用你 bot 的身份干活
-          prompt: |
-            你是"$(github.event.issue.title)"项目的专属 AI 助手。
-            回复用中文，简洁直接，别啰嗦。
-        # 不传 prompt 时，让 /oc 命令 + .opencode/commands/ 接管
+          model: opencode/deepseek-v4-flash-free
+          use_github_token: true
+          prompt: ${{ secrets.OPENCODE_PROMPT }}
