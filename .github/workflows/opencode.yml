@@ -41,6 +41,7 @@ jobs:
         uses: anomalyco/opencode/github@latest
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          GITHUB_TOKEN: ${{ steps.token.outputs.token }}
         with:
           model: opencode/deepseek-v4-flash-free         # 换成你爱用的
           use_github_token: true              # 关键！用你 bot 的身份干活
